@@ -31,7 +31,7 @@ Refer to the official documentation for installation guides:
 3. Docker Compose
 
 Afterward, clone this repository to your local machine: 
-** git clone https://github.com/sap156/Kafka.git **
+**git clone https://github.com/sap156/Kafka.git**
 
 # Usage
 The Python scripts in this repository demonstrate various interactions with Apache Kafka:
