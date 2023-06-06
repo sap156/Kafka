@@ -31,21 +31,29 @@ Refer to the official documentation for installation guides:
 3. Docker Compose
 
 Afterward, clone this repository to your local machine: 
-< git clone https://github.com/sap156/Kafka.git >
+** git clone https://github.com/sap156/Kafka.git **
 
 # Usage
 The Python scripts in this repository demonstrate various interactions with Apache Kafka:
 
-1. *_Producer.py: These scripts produces data to a specified Kafka topic.
-2. Kafka_Consumer_Test.py: This script consumes data from a specified Kafka topic.
-3. Kafka_Test_Connection.py: This script tests connection to your Kafka cluster and fetches Kafka server names.
-4. List_Kafka_Topics.py: This script fetches Kafka topic names.
+1. ***_Producer.py:** These scripts produces data to a specified Kafka topic.
+2. **Kafka_Consumer_Test.py:** This script consumes data from a specified Kafka topic.
+3. **Kafka_Test_Connection.py:** This script tests connection to your Kafka cluster and fetches Kafka server names.
+4. **List_Kafka_Topics.py:** This script fetches Kafka topic names.
 
 Before running any script, make sure that your Kafka server is up and running.
 
 The Docker Compose files define services, networks, and volumes for a Kafka deployment. You can use them as-is or modify them according to your needs. To run a Docker Compose file:
 
-docker-compose -f <docker-compose-file.yml> up
+**docker-compose -f <docker-compose-file.yml> up**
+
+Remember to replace <docker-compose-file.yml> with the actual file name.
+
+# **Contributing**
+
+
+# **License**
+
 
 
 
