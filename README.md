@@ -45,7 +45,7 @@ Before running any script, make sure that your Kafka server is up and running.
 
 The Docker Compose files define services, networks, and volumes for a Kafka deployment. You can use them as-is or modify them according to your needs. To run a Docker Compose file:
 
-**docker-compose -f <docker-compose-file.yml> up**
+**docker-compose -f <docker-compose-file.yml> up -d**
 
 Remember to replace <docker-compose-file.yml> with the actual file name.
 
