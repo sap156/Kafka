@@ -37,9 +37,11 @@ Afterward, clone this repository to your local machine:
 The Python scripts in this repository demonstrate various interactions with Apache Kafka:
 
 1. ***_Producer.py:** These scripts produces data to a specified Kafka topic.
-2. **Kafka_Consumer_Test.py:** This script consumes data from a specified Kafka topic.
-3. **Kafka_Test_Connection.py:** This script tests connection to your Kafka cluster and fetches Kafka server names.
-4. **List_Kafka_Topics.py:** This script fetches Kafka topic names.
+2. ***_Persist_and_Produce.py:** These scripts produces data to a specified Kafka topic and/or persist data to PostgresSQL.
+3. **Kafka_Consumer_Test.py:** This script consumes data from a specified Kafka topic.
+4. **Kafka_Test_Connection.py:** This script tests connection to your Kafka cluster and fetches Kafka server names.
+5. **List_Kafka_Topics.py:** This script fetches Kafka topic names.
+6. **Kafka_Create_Topic.py:** This script will create a new Kafka topic with desired partition and replication factor.
 
 Before running any script, make sure that your Kafka server is up and running.
 
