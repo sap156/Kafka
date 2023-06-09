@@ -12,7 +12,9 @@ kafka_topic = input("Enter the Kafka topic: ")
 producer = Producer({
     'bootstrap.servers': kafka_broker,
     'queue.buffering.max.messages': 10000000,  # Set the desired queue size
-    'compression.type': 'zstd'  # Or 'snappy', 'lz4', 'zstd'
+    'queue.buffering.max.ms': 500,
+    'compression.type': 'zstd',  # 'gzip' Or 'snappy', 'lz4', 'zstd'
+    'acks': 'all'  # or '0' or '1' or '-1'/ 'all'
 })
 
 def get_api_data(api_url):
