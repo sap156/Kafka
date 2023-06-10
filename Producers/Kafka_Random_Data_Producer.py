@@ -13,6 +13,7 @@ num_sensors = int(input("Enter the number of sensors to generate data for: "))
 # Create a producer to send data to Kafka
 producer = Producer({
     'bootstrap.servers': kafka_broker,
+    'enable.idempotence': True,
     'queue.buffering.max.messages': 10000000,  # Set the desired queue size
     'queue.buffering.max.ms': 500,
     'compression.type': 'zstd',  # 'gzip' Or 'snappy', 'lz4', 'zstd'
