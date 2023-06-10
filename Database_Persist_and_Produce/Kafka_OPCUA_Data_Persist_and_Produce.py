@@ -15,6 +15,7 @@ persist_data = input("Do you want to persist the data to TimescaleDB? (yes/no): 
 # Database variables
 if persist_data.lower() == 'yes':
     db_name = input("Enter your database name: ")
+    db_schema = input("Enter your schema name: ")
     db_user = input("Enter your database username: ")
     db_password = getpass.getpass("Enter your database password: ")
     db_host = input("Enter your database host (default is localhost): ")
@@ -46,7 +47,7 @@ def publish_to_kafka(data, display_name, cur=None, conn=None):
     # Persist the data to TimescaleDB
     if conn:
         cur.execute(
-            f"INSERT INTO kafkadata.{kafka_topic} (sensor_name, value) VALUES (%s, %s)",
+            f"INSERT INTO {db_schema}.{kafka_topic} (sensor_name, value) VALUES (%s, %s)",
             (display_name, data)
         )
         conn.commit()
@@ -70,7 +71,7 @@ while True:
 
             cur = conn.cursor()
             cur.execute(f"""
-                CREATE TABLE IF NOT EXISTS kafkadata.{kafka_topic} (
+                CREATE TABLE IF NOT EXISTS {db_schema}.{kafka_topic} (
                     timestamp TIMESTAMPTZ NOT NULL DEFAULT NOW(),
                     sensor_name TEXT,
                     value TEXT

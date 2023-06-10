@@ -5,7 +5,8 @@ from confluent_kafka import Producer
 from datetime import datetime
 
 # Get user inputs
-kafka_broker = input("Enter the Kafka broker (format - localhost:9092): ")
+kafka_broker = "localhost:9092"
+kafka_broker = input("Enter the Kafka broker (format - localhost:9092): ") or kafka_broker
 kafka_topic = input("Enter the Kafka topic: ")
 num_sensors = int(input("Enter the number of sensors to generate data for: "))
 

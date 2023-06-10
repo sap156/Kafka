@@ -17,6 +17,7 @@ persist_data = input("Do you want to persist the data to TimescaleDB? (yes/no): 
 # Database variables (fill this with your own info)
 if persist_data.lower() == 'yes':
     db_name = input("Enter your database name: ")
+    db_schema = input("Enter your schema name: ")
     db_user = input("Enter your database username: ")
     db_password = getpass.getpass("Enter your database password: ")
     db_host = input("Enter your database host (default is localhost): ")
@@ -67,7 +68,7 @@ def process_file(filepath, time_column_name, cur=None, conn=None):
                     # Persist the data to TimescaleDB
                     if conn and cur:
                         cur.execute(
-                            f"INSERT INTO kafkadata.{kafka_topic} (timestamp, data) VALUES (%s, %s)",
+                            f"INSERT INTO {db_schema}.{kafka_topic} (timestamp, data) VALUES (%s, %s)",
                             (timestamp, message_json)
                         )
 
@@ -109,7 +110,7 @@ while True:
 
             # Create a table if it doesn't exist
             cur.execute(sql.SQL(f"""
-                CREATE TABLE IF NOT EXISTS kafkadata.{kafka_topic} (
+                CREATE TABLE IF NOT EXISTS {db_schema}.{kafka_topic} (
                     timestamp TIMESTAMPTZ NOT NULL,
                     data JSONB
                 );

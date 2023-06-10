@@ -2,7 +2,8 @@ from confluent_kafka import Consumer, TopicPartition
 import json
 
 # Prompt user for inputs
-kafka_broker = input("Enter Kafka broker (format - localhost:9092): ")
+kafka_broker = "localhost:9092"
+kafka_broker = input("Enter Kafka broker (format - localhost:9092): ") or kafka_broker
 kafka_topic = input("Enter Kafka topic: ")
 offset = input("Enter offset (for beginning, type 'beginning'. For end, type 'end'): ")
 

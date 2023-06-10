@@ -2,7 +2,8 @@ from confluent_kafka.admin import AdminClient, NewTopic
 from confluent_kafka import KafkaException
 
 # Prompt user for inputs
-kafka_broker = input("Enter Kafka broker (format - localhost:9092): ")
+kafka_broker = "localhost:9092"
+kafka_broker = input("Enter Kafka broker (format - localhost:9092): ") or kafka_broker
 kafka_topic = input("Enter new Kafka topic: ")
 num_partitions = int(input("Enter number of partitions: "))
 replication_factor = int(input("Enter replication factor: "))

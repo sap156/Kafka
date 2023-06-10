@@ -1,7 +1,8 @@
 from confluent_kafka import Producer, KafkaError
 
 # Prompt user for inputs
-kafka_broker = input("Enter Kafka broker (format - localhost:9092): ")
+kafka_broker = "localhost:9092"
+kafka_broker = input("Enter Kafka broker (format - localhost:9092): ") or kafka_broker
 
 def delivery_report(err, msg):
     """ Called once for each message produced to indicate delivery result.

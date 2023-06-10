@@ -1,7 +1,8 @@
 from confluent_kafka.admin import AdminClient
 
 # Prompt user for Kafka broker input
-kafka_broker = input("Enter Kafka broker (format - localhost:9092): ")
+kafka_broker = "localhost:9092"
+kafka_broker = input("Enter Kafka broker (format - localhost:9092): ") or kafka_broker
 
 # Create a Kafka admin client
 admin_client = AdminClient({

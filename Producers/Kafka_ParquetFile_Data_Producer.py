@@ -5,8 +5,9 @@ from confluent_kafka import Producer
 import json
 
 # Get user inputs
+kafka_broker = "localhost:9092"
 data_dir = input("Enter the directory path containing the parquet files: ")
-kafka_broker = input("Enter the Kafka broker (format - localhost:9092): ")
+kafka_broker = input("Enter the Kafka broker (format - localhost:9092): ") or kafka_broker
 kafka_topic = input("Enter the Kafka topic: ")
 time_column_name = input("Enter the name of the time column in your data: ")
 

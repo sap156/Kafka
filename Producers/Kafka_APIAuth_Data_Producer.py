@@ -4,9 +4,10 @@ import requests
 import json
 
 # Get user inputs
+kafka_broker = "localhost:9092"
 api_url = input("Enter the URL of the API: ")
 api_auth_key = input("Enter the API auth key: ")
-kafka_broker = input("Enter the Kafka broker (format - localhost:9092): ")
+kafka_broker = input("Enter the Kafka broker (format - localhost:9092): ") or kafka_broker
 kafka_topic = input("Enter the Kafka topic: ")
 
 # Create a producer to send data to Kafka
