@@ -25,7 +25,7 @@ USER 1001
 You can build your Docker image using the following command:
 'docker build -f /path/to/this/Dockerfile . -t my-connector-image-name'
 
-Remember to replace `/path/to/this/Dockerfile` with the actual path to the Dockerfile.
+Remember to replace `/path/to/this/Dockerfile` with the actual path to the Dockerfile.```
 
 
 ## Plugins Folder
