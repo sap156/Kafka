@@ -1,13 +1,5 @@
-# Kafka Repo README
+# KafkaIo Repository
 Welcome to sap156/Kafka repository! This repository hosts a collection of Python scripts and Docker Compose files aimed to help you interact with Apache Kafka, a leading open-source distributed event streaming platform.
-
-# Table of Contents
-1. Introduction
-2. Prerequisites
-3. Installation
-4. Usage
-5. Contributing
-6. License
 
 # Introduction
 Apache Kafka is a robust event streaming platform that can process trillions of events daily. It offers low-latency, real-time handling and is used for a variety of applications such as data pipelines, analytics, data integration, and mission-critical applications.
@@ -30,31 +22,39 @@ Refer to the official documentation for installation guides:
 2. Docker
 3. Docker Compose
 
-Afterward, clone this repository to your local machine: 
-**git clone https://github.com/sap156/Kafka.git**
+This repository contains scripts and configurations for producing, consuming, and processing data with Kafka, along with Docker Compose configurations for running Kafka and Zookeeper.
 
-# Usage
-The Python scripts in this repository demonstrate various interactions with Apache Kafka:
+## Repository Structure
 
-1. ***_Producer.py:** These scripts produces data to a specified Kafka topic.
-2. ***_Persist_and_Produce.py:** These scripts produces data to a specified Kafka topic and/or persist data to PostgresSQL.
-3. **Kafka_Consumer_Test.py:** This script consumes data from a specified Kafka topic.
-4. **Kafka_Test_Connection.py:** This script tests connection to your Kafka cluster and fetches Kafka server names.
-5. **List_Kafka_Topics.py:** This script fetches Kafka topic names.
-6. **Kafka_Create_Topic.py:** This script will create a new Kafka topic with desired partition and replication factor.
+- `Database_Persist_and_Produce/`: This directory contains scripts that both produce data to Kafka and write data to a PostgreSQL database. These scripts can work with data from various sources including APIs, CSV and Parquet files, and OPC UA servers.
+  
+- `Database_Persist_only/`: This directory contains Kafka consumer scripts that consume data from Kafka and can persist it to a PostgreSQL database.
+  
+- `GeneralScripts/`: This directory contains general Kafka utility scripts such as listing Kafka brokers, creating Kafka topics, testing Kafka consumers, and checking Kafka connections.
+  
+- `Producers/`: This directory contains scripts to produce data to a Kafka topic. The scripts can handle various data sources such as APIs, log files, CSV and Parquet files, and OPC UA servers.
 
-Before running any script, make sure that your Kafka server is up and running.
+- `Kafka_Connect/`: This directory contains everything needed to create a custom Docker image from the Confluent Kafka Connect image, including a Dockerfile and a number of plugins.
 
-The Docker Compose files define services, networks, and volumes for a Kafka deployment. You can use them as-is or modify them according to your needs. To run a Docker Compose file:
+- `*.yml`: These are Docker Compose files for running Kafka and Zookeeper configurations.
 
-**docker-compose -f <docker-compose-file.yml> up -d**
+## Getting Started
 
-Remember to replace <docker-compose-file.yml> with the actual file name.
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/KafkaIo.git
+    cd KafkaIo
+    ```
 
-# **Contributing**
+2. Depending on your use case, navigate to the appropriate directory and run the necessary scripts. For example, if you want to produce data to a Kafka topic from a CSV file, you would use the `Kafka_CSVFile_Data_Producer.py` script in the `Producers/` directory.
+   
+3. To run Kafka and Zookeeper using Docker, use one of the provided Docker Compose configurations. For example, to run a single Zookeeper instance with multiple Kafka instances, you might use the `single-zk-multiple3-kafka.yml` file:
+    ```bash
+    docker-compose -f single-zk-multiple3-kafka.yml up -d
+    ```
 
+We hope this repository is a useful resource for your Kafka projects. If you encounter any issues or have questions, please raise an issue on this repository.
 
-# **License**
 
 
 
