@@ -63,17 +63,17 @@ services:
     networks:
       - kafka-network
 
-  kafka-connect:
-    image: confluentinc/cp-kafka-connect:7.3.2
+  kafka-connect-1:
+    image: my-kafka-connect-image:latest
     ports:
       - "8083:8083"
     environment:
       CONNECT_BOOTSTRAP_SERVERS: kafka1:19092,kafka2:19093,kafka3:19094
       CONNECT_REST_PORT: 8083
-      CONNECT_GROUP_ID: compose-connect-group
-      CONNECT_CONFIG_STORAGE_TOPIC: compose-connect-configs
-      CONNECT_OFFSET_STORAGE_TOPIC: compose-connect-offsets
-      CONNECT_STATUS_STORAGE_TOPIC: compose-connect-status
+      CONNECT_GROUP_ID: compose-connect-group-1
+      CONNECT_CONFIG_STORAGE_TOPIC: compose-connect-configs-1
+      CONNECT_OFFSET_STORAGE_TOPIC: compose-connect-offsets-1
+      CONNECT_STATUS_STORAGE_TOPIC: compose-connect-status-1
       CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
       CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.storage.StringConverter
       CONNECT_INTERNAL_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
@@ -81,10 +81,54 @@ services:
       CONNECT_REST_ADVERTISED_HOST_NAME: 'kafka-connect'
       CONNECT_LOG4J_ROOT_LOGLEVEL: 'INFO'
       CONNECT_LOG4J_LOGGERS: 'org.apache.kafka.connect.runtime.rest=WARN,org.reflections=ERROR'
-      CONNECT_PLUGIN_PATH: '/usr/share/java,/usr/share/confluent-hub-components'
+      CONNECT_PLUGIN_PATH: '/usr/share/java,/opt/kafka/plugins' # Update this line
     networks:
       - kafka-network
-
+      
+  kafka-connect-2:
+    image: my-kafka-connect-image:latest
+    ports:
+      - "8084:8084"
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: kafka1:19092,kafka2:19093,kafka3:19094
+      CONNECT_REST_PORT: 8084
+      CONNECT_GROUP_ID: compose-connect-group-2
+      CONNECT_CONFIG_STORAGE_TOPIC: compose-connect-configs-2
+      CONNECT_OFFSET_STORAGE_TOPIC: compose-connect-offsets-2
+      CONNECT_STATUS_STORAGE_TOPIC: compose-connect-status-2
+      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+      CONNECT_INTERNAL_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_INTERNAL_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_REST_ADVERTISED_HOST_NAME: 'kafka-connect'
+      CONNECT_LOG4J_ROOT_LOGLEVEL: 'INFO'
+      CONNECT_LOG4J_LOGGERS: 'org.apache.kafka.connect.runtime.rest=WARN,org.reflections=ERROR'
+      CONNECT_PLUGIN_PATH: '/usr/share/java,/opt/kafka/plugins' # Update this line
+    networks:
+      - kafka-network
+    
+  kafka-connect-3:
+    image: my-kafka-connect-image:latest
+    ports:
+      - "8085:8085"
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: kafka1:19092,kafka2:19093,kafka3:19094
+      CONNECT_REST_PORT: 8085
+      CONNECT_GROUP_ID: compose-connect-group-3
+      CONNECT_CONFIG_STORAGE_TOPIC: compose-connect-configs-3
+      CONNECT_OFFSET_STORAGE_TOPIC: compose-connect-offsets-3
+      CONNECT_STATUS_STORAGE_TOPIC: compose-connect-status-3
+      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+      CONNECT_INTERNAL_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_INTERNAL_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_REST_ADVERTISED_HOST_NAME: 'kafka-connect'
+      CONNECT_LOG4J_ROOT_LOGLEVEL: 'INFO'
+      CONNECT_LOG4J_LOGGERS: 'org.apache.kafka.connect.runtime.rest=WARN,org.reflections=ERROR'
+      CONNECT_PLUGIN_PATH: '/usr/share/java,/opt/kafka/plugins' # Update this line
+    networks:
+      - kafka-network
+  
   schema-registry:
     image: confluentinc/cp-schema-registry:7.3.2
     ports:
@@ -95,28 +139,30 @@ services:
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
     networks:
       - kafka-network
-
+  
   kafka-ui:
-    container_name: kafka-ui
-    image: provectuslabs/kafka-ui:latest
-    ports:
-      - 8080:8080 # Changed to avoid port clash with akhq
     depends_on:
       - kafka1
       - kafka2
       - kafka3
       - schema-registry
-      - kafka-connect
+      - kafka-connect-1
+      - kafka-connect-2
+      - kafka-connect-3
     environment:
+      KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME: connect-1
+      KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS: http://kafka-connect-1:8083
+      KAFKA_CLUSTERS_0_KAFKACONNECT_1_NAME: connect-2
+      KAFKA_CLUSTERS_0_KAFKACONNECT_1_ADDRESS: http://kafka-connect-2:8084
+      KAFKA_CLUSTERS_0_KAFKACONNECT_2_NAME: connect-3
+      KAFKA_CLUSTERS_0_KAFKACONNECT_2_ADDRESS: http://kafka-connect-3:8085
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka1:19092,kafka2:19093,kafka3:19094
       KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://schema-registry:8081
-      KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME: connect
-      KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS: http://kafka-connect:8083
       DYNAMIC_CONFIG_ENABLED: 'true'
     networks:
       - kafka-network
-
+    
 networks:
   kafka-network:
     driver: bridge
