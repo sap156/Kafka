@@ -1,4 +1,4 @@
-# KafkaIo Repository
+# KafkaIO Repository
 Welcome to sap156/Kafka repository! This repository hosts a collection of Python scripts and Docker Compose files aimed to help you interact with Apache Kafka, a leading open-source distributed event streaming platform.
 
 # Introduction
@@ -42,8 +42,8 @@ This repository contains scripts and configurations for producing, consuming, an
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/KafkaIo.git
-    cd KafkaIo
+    git clone https://github.com/sap156/KafkaIO.git
+    cd KafkaIO
     ```
 
 2. Depending on your use case, navigate to the appropriate directory and run the necessary scripts. For example, if you want to produce data to a Kafka topic from a CSV file, you would use the `Kafka_CSVFile_Data_Producer.py` script in the `Producers/` directory.
