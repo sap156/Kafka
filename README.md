@@ -1,5 +1,5 @@
 # KafkaIO Repository
-Welcome to sap156/Kafka repository! This repository hosts a collection of Python scripts and Docker Compose files aimed to help you interact with Apache Kafka, a leading open-source distributed event streaming platform.
+Welcome to sap156/KafkaIO repository! This repository hosts a collection of Python scripts and Docker Compose files aimed to help you interact with Apache Kafka, a leading open-source distributed event streaming platform.
 
 # Introduction
 Apache Kafka is a robust event streaming platform that can process trillions of events daily. It offers low-latency, real-time handling and is used for a variety of applications such as data pipelines, analytics, data integration, and mission-critical applications.
