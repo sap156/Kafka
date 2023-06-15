@@ -11,4 +11,4 @@ ENV CONNECT_PLUGIN_PATH="/opt/kafka/plugins"
 # Change user back to the default user
 USER 1001
 
-# docker build -f /path/to/this/Dockerfile . -t my-connector-image-name
+# docker build -f /path/to/this/Dockerfile . -t my-connector-image-name .
